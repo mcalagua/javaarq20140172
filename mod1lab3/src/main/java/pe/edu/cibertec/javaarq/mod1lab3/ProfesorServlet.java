@@ -24,6 +24,7 @@ import pe.edu.cibertec.javaarq.mod1lab3.jaxbcontext.Profesor;
 import pe.edu.cibertec.javaarq.mod1lab3.jaxbcontext.Requerimiento;
 import pe.edu.cibertec.javaarq.mod1lab3.jaxbcontext.Respuesta;
 import pe.edu.cibertec.javaarq.mod1lab3.tools.JAXB;
+import pe.edu.cibertec.javaarq.mod1lab3.tools.JSON;
 import pe.edu.cibertec.javaarq.mod1lab3.tools.Serializer;
 
 /**
@@ -34,7 +35,7 @@ import pe.edu.cibertec.javaarq.mod1lab3.tools.Serializer;
 public class ProfesorServlet extends HttpServlet {
 
     @Inject
-    @JAXB
+    @JSON
     private Serializer ser;
 
     /**
@@ -49,7 +50,7 @@ public class ProfesorServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/xml;charset=UTF-8");
+        response.setContentType("application/javascript;charset=UTF-8");
         try (PrintWriter out = response.getWriter(); InputStream in = request.getInputStream()) {
             switch (request.getMethod()) {
                 case "GET": {
