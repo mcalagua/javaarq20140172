@@ -23,8 +23,8 @@ import javax.xml.bind.Marshaller;
  *
  * @author user
  */
-@WebServlet(name = "Demo", urlPatterns = {"/Demo"})
-public class Demo extends HttpServlet {
+@WebServlet(name = "profesor", urlPatterns = {"/profesor"})
+public class ProfesorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +38,22 @@ public class Demo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/xml;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            Profesor profesor = getProfesor();
-            serializar(profesor, out);
+        try (PrintWriter out = response.getWriter()) {
+            switch (request.getMethod()) {
+                case "GET":
+                    //buscar un profesor o la lista de profesores
+                    Profesor profesor = getProfesor();
+                    serializar(profesor, out);
+                    break;
+                default:
+                    response.setStatus(500);
+                    Respuesta respuesta = new Respuesta(false, "Metodo no reconocido");
+                    serializar(respuesta, out);
+                    break;
+            }
             out.flush();
         } catch (JAXBException ex) {
             response.sendError(500, ex.getMessage());
-        } finally {
-            out.close();
         }
     }
 
@@ -103,10 +110,10 @@ public class Demo extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void serializar(Profesor profesor, PrintWriter out) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(Profesor.class);
+    private void serializar(Object jaxbobj, PrintWriter out) throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(Profesor.class, Respuesta.class);
         final Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(profesor, out);
+        marshaller.marshal(jaxbobj, out);
     }
 
 }

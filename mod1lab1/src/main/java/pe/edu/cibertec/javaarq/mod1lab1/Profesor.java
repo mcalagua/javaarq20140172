@@ -10,14 +10,17 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
  * @author user
  */
 @XmlRootElement
-@XmlType(propOrder = {"codigo", "nombre", "apellido", "fechaDeIngreso","alumnos"})
+@XmlType(propOrder = {"codigo", "nombre", "apellido", "fechaDeIngreso", "alumnos"})
+@XmlSeeAlso({Alumnos.class})
 public class Profesor {
 
     private Integer codigo;
@@ -84,6 +87,8 @@ public class Profesor {
         this.fechaDeIngreso = fechaDeIngreso;
     }
 
+    @XmlJavaTypeAdapter(AlumnosAdapter.class)
+    @XmlElement(name = "alumnos")
     public List<Alumno> getAlumnos() {
         return alumnos;
     }
