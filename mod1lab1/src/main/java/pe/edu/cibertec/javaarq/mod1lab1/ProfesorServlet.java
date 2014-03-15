@@ -6,18 +6,18 @@
 package pe.edu.cibertec.javaarq.mod1lab1;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 /**
  *
@@ -25,6 +25,9 @@ import javax.xml.bind.Marshaller;
  */
 @WebServlet(name = "profesor", urlPatterns = {"/profesor"})
 public class ProfesorServlet extends HttpServlet {
+
+    @Inject
+    private Serializer ser;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,23 +40,28 @@ public class ProfesorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/xml;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter(); InputStream in = request.getInputStream()) {
             switch (request.getMethod()) {
-                case "GET":
+                case "GET": {
                     //buscar un profesor o la lista de profesores
                     Profesor profesor = getProfesor();
-                    serializar(profesor, out);
-                    break;
+                    ser.marshall(profesor, out);
+                }
+                break;
+                case "PUT": {
+                    Profesor profesor = (Profesor) ser.unmarshall(in);
+                    Logger.getAnonymousLogger().log(Level.INFO, profesor.toString());
+                }
+                break;
                 default:
                     response.setStatus(500);
                     Respuesta respuesta = new Respuesta(false, "Metodo no reconocido");
-                    serializar(respuesta, out);
+                    ser.marshall(respuesta, out);
                     break;
             }
             out.flush();
-        } catch (JAXBException ex) {
-            response.sendError(500, ex.getMessage());
         }
     }
 
@@ -100,6 +108,12 @@ public class ProfesorServlet extends HttpServlet {
         processRequest(request, response);
     }
 
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
     /**
      * Returns a short description of the servlet.
      *
@@ -109,11 +123,5 @@ public class ProfesorServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void serializar(Object jaxbobj, PrintWriter out) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(Profesor.class, Respuesta.class);
-        final Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(jaxbobj, out);
-    }
 
 }
