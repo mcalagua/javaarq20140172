@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pe.edu.cibertec.javaarq.mod1lab1;
+package pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext;
 
 import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -18,9 +16,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author user
  */
-@XmlRootElement
 @XmlType(propOrder = {"codigo", "nombre", "apellido", "fechaDeIngreso", "alumnos"})
-@XmlSeeAlso({Alumnos.class})
 public class Profesor {
 
     private Integer codigo;

@@ -5,6 +5,10 @@
  */
 package pe.edu.cibertec.javaarq.mod1lab1;
 
+import pe.edu.cibertec.javaarq.mod1lab1.tools.Serializer;
+import pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext.Alumno;
+import pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext.Profesor;
+import pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext.Respuesta;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -18,6 +22,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext.DatosProfesor;
+import pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext.Requerimiento;
+import pe.edu.cibertec.javaarq.mod1lab1.tools.JAXB;
 
 /**
  *
@@ -27,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ProfesorServlet extends HttpServlet {
 
     @Inject
+    @JAXB
     private Serializer ser;
 
     /**
@@ -46,13 +54,14 @@ public class ProfesorServlet extends HttpServlet {
             switch (request.getMethod()) {
                 case "GET": {
                     //buscar un profesor o la lista de profesores
-                    Profesor profesor = getProfesor();
-                    ser.marshall(profesor, out);
+                    Respuesta respuesta = new Respuesta(true, null);
+                    respuesta.setDatos(new DatosProfesor(getProfesor()));
+                    ser.marshall(respuesta, out);
                 }
                 break;
                 case "PUT": {
-                    Profesor profesor = (Profesor) ser.unmarshall(in);
-                    Logger.getAnonymousLogger().log(Level.INFO, profesor.toString());
+                    Requerimiento requerimiento = (Requerimiento) ser.unmarshall(in);
+                    Logger.getAnonymousLogger().log(Level.INFO, requerimiento.toString());
                 }
                 break;
                 default:

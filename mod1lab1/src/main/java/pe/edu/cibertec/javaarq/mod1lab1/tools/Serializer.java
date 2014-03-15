@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pe.edu.cibertec.javaarq.mod1lab1;
+package pe.edu.cibertec.javaarq.mod1lab1.tools;
 
 import java.io.InputStream;
 import java.io.PrintWriter;

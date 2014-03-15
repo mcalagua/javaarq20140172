@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pe.edu.cibertec.javaarq.mod1lab1;
+package pe.edu.cibertec.javaarq.mod1lab1.tools;
 
+import pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext.Profesor;
+import pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext.Respuesta;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.annotation.PostConstruct;
@@ -17,6 +19,7 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author user
  */
+@JAXB
 public class JaxbSerializer implements Serializer {
 
     //El kaxb context es thread safe :)
@@ -26,7 +29,7 @@ public class JaxbSerializer implements Serializer {
     @PostConstruct
     public void create() {
         try {
-            context = JAXBContext.newInstance(Profesor.class, Respuesta.class);
+            context = JAXBContext.newInstance("pe.edu.cibertec.javaarq.mod1lab1.jaxbcontext");
         } catch (JAXBException ex) {
             //FIXME crear un nuevo tipo de exception
             throw new RuntimeException(ex);
