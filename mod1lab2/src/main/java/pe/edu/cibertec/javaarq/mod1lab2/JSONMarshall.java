@@ -20,8 +20,8 @@ public class JSONMarshall {
         programa.setNombre("Java Architect Application Developer");
         programa.setModulos(new ArrayList<String>() {
             {
-                add("Fundamentos de Comunicación en sistemas distribuidos");
-                add("Arquitectura de Web Services y estándares utilizados");
+                add("Fundamentos de Comunicación en sistemas distribuidos 20140172");
+                add("Arquitectura de Web Services y estándares utilizados 20140172");
             }
         });
         programa.setFechaInicio(new GregorianCalendar(2013, 0, 22).getTime());
@@ -32,8 +32,10 @@ public class JSONMarshall {
         try {
             // output pretty printed
             mapper.configure(Feature.INDENT_OUTPUT, true);
+            new File("run").mkdir();
+            final File file = new File("run/programa.json");
 
-            mapper.writeValue(new File("/home/tmp/programa.json"), programa);
+            mapper.writeValue(file, programa);
 
             System.out.println(mapper.writeValueAsString(programa));
 

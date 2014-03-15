@@ -15,7 +15,7 @@ public class JASONUnMarshall {
 
         try {
 
-            Programa programa = mapper.readValue(new File("/home/tmp/programa.json"), Programa.class);
+            Programa programa = mapper.readValue(new File("run/programa.json"), Programa.class);
 
             System.out.println("Datos del programa");
             System.out.println("Codigo: " + programa.getCodigo());
