@@ -29,8 +29,6 @@ public class LoginService {
      * @return
      */
     @WebMethod(operationName = "authenticate")
-    //MODIFICAR EL SERVICIO DE TAL FORMA QUE SE UTILICE UN WRAPPER PARA LOS DATOS DE USER & PASSWORD
-    //public boolean authenticate(@WebParam(name = "user") User user) {
     public boolean authenticate(@WebParam(name = "user") String user, @WebParam(name = "password") String password) {
         if (StringUtils.isEmpty(user) || StringUtils.isEmpty(password)) {
             return false;
