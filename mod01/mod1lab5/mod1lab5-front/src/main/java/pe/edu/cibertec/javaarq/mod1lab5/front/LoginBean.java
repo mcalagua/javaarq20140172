@@ -5,7 +5,6 @@
  */
 package pe.edu.cibertec.javaarq.mod1lab5.front;
 
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.ws.WebServiceRef;
