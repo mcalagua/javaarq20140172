@@ -5,8 +5,13 @@
  */
 package pe.edu.cibertec.javaarq.mod1lab8;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +21,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -54,14 +61,20 @@ public class NoticiasResource {
 
     @GET
     @Produces("application/json")
-    public List<Noticia> leerNoticiasJSON() {
-        return findNoticias();
+    public Response leerNoticiasJSON() {
+        return Response.ok(findNoticias()).build();
     }
 
     @GET
     @Produces("application/xml")
     public Noticias leerNoticiasXML() {
         return new Noticias(findNoticias());
+    }
+
+    @GET
+    @Produces("image/png")
+    public Response leerNoticiasIMG() {
+        return Response.temporaryRedirect(URI.create("http://fedapal.com/web/images/noticias.png")).build();
     }
 
     @GET
