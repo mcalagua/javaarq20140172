@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="top">
+                DEMO DE LOGIN
+            </ui:define>
+
+            <ui:define name="left">
+
+            </ui:define>
+
+            <ui:define name="right">
+
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Usuario" />
+                        <h:inputText value="#{credentials.user}" />
+                        <h:outputLabel value="Clave" />
+                        <h:inputSecret value="#{credentials.password}" />
+                        <h:panelGroup></h:panelGroup>
+                        <h:commandButton value="Ingresar" action="#{loginBean.login()}" />
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                Ciberted :p
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

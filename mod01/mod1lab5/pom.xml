@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>pe.edu.cibertec.javaarq</groupId>
+  <artifactId>mod1lab5</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>mod1lab5</name>
+  <modules>
+    <module>mod1lab5-ear</module>
+    <module>mod1lab5-service</module>
+    <module>mod1lab5-legacy</module>
+    <module>mod1lab5-front</module>
+  </modules>
+</project>
