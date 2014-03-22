@@ -5,7 +5,13 @@
  */
 package pe.edu.cibertec.javaarq;
 
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Singleton;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
@@ -17,10 +23,21 @@ public class LoginLegacyService implements LoginLegacyServiceLocal {
     @Override
     public boolean authenticate(final String user, final String password) {
         //abrir el archivo users.xml
+        URL usersURL = this.getClass().getClassLoader().getResource("/pe/edu/cibertec/javaarq/users.xml");
 
-        //parsear el archivo usando JAXB
-        //obtener una referencia a la entidad usersList
-        //buscar en la entidad si la combinación usuario y password es válida
+        try {
+            JAXBContext context = JAXBContext.newInstance(UsersList.class);
+            Unmarshaller u = context.createUnmarshaller();
+            UsersList users = (UsersList) u.unmarshal(usersURL);
+            for (User item : users.getUsers()) {
+                if (user.equals(item.getName()) && password.equals(item.getPassword())) {
+                    return true;
+                }
+            }
+        } catch (JAXBException ex) {
+            Logger.getLogger(LoginLegacyService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return false;
     }
 
