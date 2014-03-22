@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.ws.WebServiceRef;
 import pe.edu.cibertec.javaarq.LoginService_Service;
+import pe.edu.cibertec.javaarq.User;
 
 /**
  *
@@ -29,10 +30,11 @@ public class LoginBean {
         try { // Call Web Service Operation
             pe.edu.cibertec.javaarq.LoginService port = service.getLoginServicePort();
             // TODO initialize WS operation arguments here
-            java.lang.String user = credentials.getUser();
-            java.lang.String password = credentials.getPassword();
+            User user = new User();
+            user.setUserName(credentials.getUser());
+            user.setPassword(credentials.getPassword());
             // TODO process result here
-            boolean result = port.authenticate(user, password);
+            boolean result = port.authenticate(user);
             System.out.println("Result = " + result);
         } catch (Exception ex) {
             // TODO handle custom exceptions here

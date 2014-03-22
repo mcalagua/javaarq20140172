@@ -5,8 +5,13 @@
 <xs:element name="authenticateResponse" type="tns:authenticateResponse"/>
 <xs:complexType name="authenticate">
     <xs:sequence>
-      <xs:element minOccurs="0" name="user" type="xs:string"/>
+      <xs:element minOccurs="0" name="userParam" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="user">
+    <xs:sequence>
       <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element minOccurs="0" name="userName" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="authenticateResponse">

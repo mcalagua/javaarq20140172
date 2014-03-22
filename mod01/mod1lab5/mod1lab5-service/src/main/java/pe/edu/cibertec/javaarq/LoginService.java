@@ -25,14 +25,13 @@ public class LoginService {
      * This is a sample web service operation
      *
      * @param user
-     * @param password
      * @return
      */
     @WebMethod(operationName = "authenticate")
-    public boolean authenticate(@WebParam(name = "user") String user, @WebParam(name = "password") String password) {
-        if (StringUtils.isEmpty(user) || StringUtils.isEmpty(password)) {
+    public boolean authenticate(@WebParam(name = "userParam") User user) {
+        if (user == null || StringUtils.isEmpty(user.getUserName()) || StringUtils.isEmpty(user.getPassword())) {
             return false;
         }
-        return legacy.authenticate(user, password);
+        return legacy.authenticate(user.getUserName(), user.getPassword());
     }
 }
