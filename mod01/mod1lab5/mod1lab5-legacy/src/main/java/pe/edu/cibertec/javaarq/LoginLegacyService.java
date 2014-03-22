@@ -16,7 +16,11 @@ public class LoginLegacyService implements LoginLegacyServiceLocal {
 
     @Override
     public boolean authenticate(final String user, final String password) {
-        //TODO agregar código
+        //abrir el archivo users.xml
+
+        //parsear el archivo usando JAXB
+        //obtener una referencia a la entidad usersList
+        //buscar en la entidad si la combinación usuario y password es válida
         return false;
     }
 

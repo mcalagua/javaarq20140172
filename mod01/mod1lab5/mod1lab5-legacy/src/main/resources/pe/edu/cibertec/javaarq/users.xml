@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<userList>
+    <<user name="carlos" pass="123456" />
+    <<user name="jorge" pass="654321" />
+</userList>
