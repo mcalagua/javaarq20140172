@@ -5,6 +5,7 @@
  */
 package pe.edu.cibertec.javaarq.mod1lab5.front;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
@@ -12,6 +13,7 @@ import javax.inject.Named;
  * @author user
  */
 @Named
+@RequestScoped
 public class Credentials {
 
     private String user;
