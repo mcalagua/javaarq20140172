@@ -10,13 +10,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import javax.xml.ws.soap.MTOM;
 
 /**
  *
  * @author user
  */
 @WebService(serviceName = "MtomDemoService")
-//@MTOM
+@MTOM(threshold = 100000)
 public class MtomDemoService {
 
     /**
@@ -25,7 +26,7 @@ public class MtomDemoService {
      * @return
      */
     @WebMethod(operationName = "imagen")
-    public MiImagen imagen() {
+    public MiImagen imagen(byte[] checkdata) {
         MiImagen imagen = new MiImagen();
 
         imagen.setNombre("logo.png");
