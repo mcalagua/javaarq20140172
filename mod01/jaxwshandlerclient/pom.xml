@@ -11,6 +11,23 @@
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <version>2.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/jaxwshandler/entrenamiento.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <packageName></packageName>
+                            <wsdlLocation>http://localhost:8080/jaxwshandler/entrenamiento?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/entrenamiento.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-entrenamiento</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
                 <dependencies>
                     <dependency>
                         <groupId>javax.xml</groupId>

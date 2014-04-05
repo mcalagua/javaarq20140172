@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://192.168.4.154:8080/jaxwshandler-1.0-SNAPSHOT/entrenamiento?wsdl" uri="wsdl/192.168.4.154_8080/jaxwshandler-1.0-SNAPSHOT/entrenamiento.wsdl"/>
+    <system systemId="http://localhost:8080/jaxwshandler/entrenamiento?wsdl" uri="wsdl/localhost_8080/jaxwshandler/entrenamiento.wsdl"/>
 </catalog>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="entrenamiento" targetNamespace="http://jaxwshandler.mod1.cibertec.edu.pe/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://jaxwshandler.mod1.cibertec.edu.pe/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://jaxwshandler.mod1.cibertec.edu.pe/" version="1.0" xmlns:tns="http://jaxwshandler.mod1.cibertec.edu.pe/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="obtenerRutas" type="tns:obtenerRutas"/>
+<xs:element name="obtenerRutasResponse" type="tns:obtenerRutasResponse"/>
+<xs:complexType name="obtenerRutas">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="latitud" type="xs:string"/>
+      <xs:element minOccurs="0" name="longitud" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="obtenerRutasResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:nivel"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="nivel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ruta" type="tns:ruta"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="ruta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="distancia" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="tipo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="obtenerRutas">
+    <wsdl:part element="tns:obtenerRutas" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerRutasResponse">
+    <wsdl:part element="tns:obtenerRutasResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Entrenamiento">
+    <wsdl:operation name="obtenerRutas">
+      <wsdl:input message="tns:obtenerRutas" name="obtenerRutas">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerRutasResponse" name="obtenerRutasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="entrenamientoSoapBinding" type="tns:Entrenamiento">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="obtenerRutas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerRutas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerRutasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="entrenamiento">
+    <wsdl:port binding="tns:entrenamientoSoapBinding" name="EntrenamientoPort">
+      <soap:address location="http://localhost:8080/jaxwshandler/entrenamiento"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
