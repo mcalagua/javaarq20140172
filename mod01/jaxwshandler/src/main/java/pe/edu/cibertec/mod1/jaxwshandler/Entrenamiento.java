@@ -7,6 +7,7 @@ package pe.edu.cibertec.mod1.jaxwshandler;
 
 import java.util.Arrays;
 import java.util.List;
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -16,6 +17,7 @@ import javax.jws.WebParam;
  * @author carlos
  */
 @WebService(serviceName = "entrenamiento")
+@HandlerChain(file = "entrenamiento_handler.xml")
 public class Entrenamiento {
 
     /**
