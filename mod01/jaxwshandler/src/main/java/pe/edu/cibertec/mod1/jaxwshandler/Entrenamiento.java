@@ -32,13 +32,13 @@ public class Entrenamiento {
             @WebParam(name = "latitud") String latitud,
             @WebParam(name = "longitud") String longitud
     ) {
-        //        return Arrays.asList(
-        //                new Nivel("1", "Avanzado",
-        //                        Arrays.asList(
-        //                                new Ruta("1", "Ruta 1", "3.5 KM", "Quema Grasa")
-        //                        )
-        //                )
-        //        );
-        throw new RuntimeException();
+        return Arrays.asList(
+                new Nivel("1", "Avanzado",
+                        Arrays.asList(
+                                new Ruta("1", "Ruta 1", "3.5 KM", "Quema Grasa")
+                        )
+                )
+        );
+//        throw new RuntimeException();
     }
 }
