@@ -80,6 +80,33 @@ public class LoggingHandler implements SOAPHandler<SOAPMessageContext> {
     }
 
     public boolean handleFault(SOAPMessageContext messageContext) {
+        System.out.println("*********************\nLoggingHandler.handleFault");
+        SOAPMessage msg = messageContext.getMessage();
+        Element element = msg.getSOAPPart().getDocumentElement();
+
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer t;
+        try {
+            t = tf.newTransformer();
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(LoggingHandler.class.getName()).log(Level.SEVERE, null, ex);
+            return true;
+        }
+        t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+        t.setOutputProperty(OutputKeys.METHOD, "xml");
+        t.setOutputProperty(OutputKeys.INDENT, "yes");
+        t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        t.setParameter("{http://xml.apache.org.xslt}indent-amount", "4");
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        try {
+            t.transform(new DOMSource(element), new StreamResult(bos));
+        } catch (TransformerException ex) {
+            Logger.getLogger(LoggingHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println("******************\n" + new String(bos.toByteArray()));
+
         return true;
     }
 

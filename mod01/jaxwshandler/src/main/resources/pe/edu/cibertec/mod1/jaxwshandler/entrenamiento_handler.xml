@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
-  <handler-chain>
-    <handler>
-      <handler-name>pe.edu.cibertec.mod1.jaxwshandler.LoggingHandler</handler-name>
-      <handler-class>pe.edu.cibertec.mod1.jaxwshandler.LoggingHandler</handler-class>
-    </handler>
-  </handler-chain>
+    <handler-chain>
+        <handler>
+            <handler-name>pe.edu.cibertec.mod1.jaxwshandler.NewLogicalHandler</handler-name>
+            <handler-class>pe.edu.cibertec.mod1.jaxwshandler.NewLogicalHandler</handler-class>
+        </handler>
+        <handler>
+            <handler-name>pe.edu.cibertec.mod1.jaxwshandler.LoggingHandler</handler-name>
+            <handler-class>pe.edu.cibertec.mod1.jaxwshandler.LoggingHandler</handler-class>
+        </handler>
+    </handler-chain>
 </handler-chains>
