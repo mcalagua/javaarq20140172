@@ -23,6 +23,10 @@
                             <packageName></packageName>
                             <wsdlLocation>http://localhost:8080/jaxwshandler/entrenamiento?wsdl</wsdlLocation>
                             <staleFile>${project.build.directory}/jaxws/stale/entrenamiento.stale</staleFile>
+                            <bindingDirectory>${basedir}/src/jaxws-bindings</bindingDirectory>
+                            <bindingFiles>
+                                <bindingFile>entrenamiento_handler.xml</bindingFile>
+                            </bindingFiles>
                         </configuration>
                         <id>wsimport-generate-entrenamiento</id>
                         <phase>generate-sources</phase>

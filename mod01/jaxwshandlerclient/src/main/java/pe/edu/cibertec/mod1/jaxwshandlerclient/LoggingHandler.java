@@ -6,11 +6,16 @@
 package pe.edu.cibertec.mod1.jaxwshandlerclient;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.namespace.QName;
+import javax.xml.soap.AttachmentPart;
+import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -31,7 +36,15 @@ import org.w3c.dom.Element;
 public class LoggingHandler implements SOAPHandler<SOAPMessageContext> {
 
     public boolean handleMessage(SOAPMessageContext messageContext) {
+        System.out.println("**************\nLoggingHandler");
         SOAPMessage msg = messageContext.getMessage();
+        try {
+            final AttachmentPart atch = msg.createAttachmentPart();
+            atch.setRawContent(new FileInputStream("/home/user/input.txt"), "plain/text");
+            msg.addAttachmentPart(atch);
+        } catch (SOAPException | FileNotFoundException ex) {
+            Logger.getLogger(LoggingHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         Element element = msg.getSOAPPart().getDocumentElement();
 
